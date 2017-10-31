@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 .App-logo {
@@ -22,6 +22,20 @@
   font-size: large;
 }
 
+.appTitle{
+  font-family: 'Cuprum', sans-serif;
+  text-align: center;
+}
+
+.eachBook{
+  font-family: 'Fira Sans', sans-serif;
+  text-align: left;
+}
+
+.newBookForm{
+  font-family: 'Fira Sans', sans-serif;
+  text-align: center;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

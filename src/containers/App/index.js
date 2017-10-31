@@ -3,6 +3,7 @@ import BookListItem from '../../components/BookListItem';
 import BookListAppTitle from '../../components/BookListAppTitle';
 import BookList from '../BookList'
 import NewGuestForm from '../NewBookForm/';
+import BookFilterInput from '../../components/BookFilterInput';
 //import logo from './logo.svg';
 //import './App.css';
 import {
@@ -38,6 +39,7 @@ class App extends Component {
     });
   }
 
+
   componentWillMount(){
 
   }
@@ -53,17 +55,27 @@ class App extends Component {
     console.log(this.state.books)
   }
 
+  updateSearch(event) {
+    this.setState({
+      // Limit to 10 characters only for search
+      search: event.target.value.substr(0, 10)
+    });
+  }
 
   render() {
     return (
       <div className="App">
-        <BookListAppTitle title={this.state.appTitle}/>
+        <div className="appTitle">
+          <BookListAppTitle title={this.state.appTitle}/>
+        </div>
        {/* <BookListItem books={this.state.books}/>*/}
         <BookList books={this.state.books}/>
         <NewGuestForm
         quote="Add New Book"
         addNewBook={this.addNewBook.bind(this)}
         />
+{/*        <BookFilterInput
+        updateSearch={this.updateSearch.bind(this)}/>*/}
       </div>
     );
   }
