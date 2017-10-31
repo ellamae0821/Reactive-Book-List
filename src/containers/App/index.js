@@ -68,7 +68,9 @@ class App extends Component {
         <div className="appTitle">
           <BookListAppTitle title={this.state.appTitle}/>
         </div>
-       {/* <BookListItem books={this.state.books}/>*/}
+
+        <hr/>
+
         <BookList books={this.state.books}/>
         <NewGuestForm
         quote="Add New Book"
