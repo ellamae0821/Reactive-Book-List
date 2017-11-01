@@ -8,6 +8,7 @@ export const loadBooks =(books) => {
     type: LOAD_BOOKS,
     books: books
   }
+  //this only happens when dispatched (mapDispatchToProps) ACTIONS - mapDispatchToProps calling dispatch -
 }
 
 //ACTION SHOULD ONLY RETURN A PAYLOAD & NOT IMPORT ANYTHING(from reducers)

@@ -37,8 +37,7 @@ class App extends Component {
     addBookToFakeXHR(newBook)
     .then ( () => {
       this.setState({
-        books: [...this.state.books],
- /*     author: [...this.state.books, newBook]*/
+        books: [...this.state.books]
       })
     });
   }

@@ -57,11 +57,10 @@ class NewBookForm extends Component {
 }
 
 const mapDispatchtoProps = (dispatch)=> {
-  return {                  // ^ --- dispatch method, same below
+  return {
     addBook: (book) => {
-      //^ name of the prop we named,eg apple
       dispatch(addBook(book))
-    }          //^action function we imported at the top
+    }
   }
 }
 //it should always be 2 arguments , if one is not required then put null
