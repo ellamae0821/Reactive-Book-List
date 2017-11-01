@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+
+import { loadBooks} from '../../actions/books'
+
 import BookListItem from '../../components/BookListItem';
 import BookListAppTitle from '../../components/BookListAppTitle';
 import BookList from '../BookList'
-import NewGuestForm from '../NewBookForm/';
+import NewBookForm from '../NewBookForm/';
 import BookFilterInput from '../../components/BookFilterInput';
 //import logo from './logo.svg';
 //import './App.css';
@@ -39,30 +43,48 @@ class App extends Component {
     });
   }
 
+/*  setFilter(evt){
+    this.setState({
+
+    })
+  }*/
+
 
   componentWillMount(){
 
   }
 
+/* before REDUX
   componentDidMount(){
     getBooksFromFakeXHR()
     .then ( (bookList) => {
-      console.log("BOOKS HEERE:",bookList);
       this.setState({
         books: bookList
       })
     })
-    console.log(this.state.books)
+  }*/
+
+
+  componentDidMount() {
+    getBooksFromFakeXHR().then(books => {
+      console.log('invoking function loadbooks in props')
+      this.props.loadBooks(books)
+    })
   }
 
-  updateSearch(event) {
+
+/*  updateSearch(event) {
     this.setState({
       // Limit to 10 characters only for search
       search: event.target.value.substr(0, 10)
     });
-  }
+  }*/
 
   render() {
+
+    console.log(this.props.books)
+    console.log(this.props.loadBooks)
+
     return (
       <div className="App">
         <div className="appTitle">
@@ -71,16 +93,35 @@ class App extends Component {
 
         <hr/>
 
-        <BookList books={this.state.books}/>
-        <NewGuestForm
-        quote="Add New Book"
-        addNewBook={this.addNewBook.bind(this)}
-        />
+        <BookList books={this.props.books}/>
+        <NewBookForm/>
 {/*        <BookFilterInput
         updateSearch={this.updateSearch.bind(this)}/>*/}
+      {/*BookFilterInput setFilter={this.setFilter.bind(this)}*/}
       </div>
     );
   }
 }
+//take the state from redux store and add it to components to our props object
+const mapStateToProps = (state) => {
+  return{
+    books: state.bookList
+  }
+}
+//dispatch actions to reducers, then to store & vice versa, should only be functions
+const mapDispatchToProps = (dispatch) => {
+  return{
+    loadBooks: (books) => {
+      console.log('dispatching the action')
+      dispatch(loadBooks(books))
+    }
+  }
+}
 
-export default App;
+const ConnectedApp = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
+
+export default ConnectedApp;
+//ConnectedApp : not giving error when renamed, because it aliases itself as "app"

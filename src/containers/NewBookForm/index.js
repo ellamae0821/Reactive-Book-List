@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
+import{addBook} from '../../actions/books'
 
 class NewBookForm extends Component {
   constructor(props){
@@ -12,9 +15,14 @@ class NewBookForm extends Component {
   }
     handleSubmit(event){
       event.preventDefault();
-      let bookTitle = this.state.titleInput;
-      let bookAuthor = this.state.authorInput;
-      this.props.addNewBook(bookTitle, bookAuthor)
+      let newBook = {
+        title: this.state.titleInput,
+        author: this.state.authorInput
+      }
+
+
+      this.props.addBook(newBook)
+
       this.setState({
         titleInput: '',
         authorInput: ''
@@ -34,6 +42,7 @@ class NewBookForm extends Component {
     }
 
     render(){
+      console.log(this.props.addBook)
       return (
         <div className="newBookForm">
           <h3>{this.props.quote}</h3>
@@ -47,4 +56,19 @@ class NewBookForm extends Component {
     }
 }
 
-export default NewBookForm;
+const mapDispatchtoProps = (dispatch)=> {
+  return {
+    addBook: (book) => {
+      dispatch(addBook(book))
+    }
+  }
+}
+//it should always be 2 arguments , if one is not required then put null
+const ConnectedNewBookForm = connect(
+  null,
+  mapDispatchtoProps
+)(NewBookForm)
+
+
+
+export default ConnectedNewBookForm;
